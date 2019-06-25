@@ -11,6 +11,7 @@ router.get(
                 id: {
                     type: "string",
                     format: "objectId"
+                    
                 }
             }
         }
@@ -18,9 +19,11 @@ router.get(
     (req, res) => {
         StudentModel.getOne(req.params, res.callback)
     }
+    
 )
 router.post("/", (req, res) => {
     StudentModel.saveData(req.body, res.callback)
+    console.log("Hello");
 })
 router.put("/:id", (req, res) => {
     res.send(`Update For Id ${req.params.id}`)
