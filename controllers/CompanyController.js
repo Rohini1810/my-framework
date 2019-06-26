@@ -1,9 +1,10 @@
 const router = Router()
+
 router.get("/", (req, res) => {
     CompanyModel.search(req.query, res.callback)
 })
 router.get(
-    "/:id",
+    "/getOne/:id",
     ValidateRequest({
         params: {
             type: "object",
@@ -21,17 +22,23 @@ router.get(
     }
     
 )
-router.post("/", (req, res) => {
+router.post("/save", (req, res) => {
     CompanyModel.saveData(req.body, res.callback)
-    console.log("Hello");
+   
 })
 router.put("/:id", (req, res) => {
-    res.send(`Update For Id ${req.params.id}`)
+    CompanyModel.updateData(req.params,req.body,res.callback)
 })
 router.patch("/:id", (req, res) => {
     res.send(`Path For Id ${req.params.id}`)
 })
 router.delete("/:id", (req, res) => {
-    res.send(`Delete For Id ${req.params.id}`)
+    CompanyModel.deleteData(req.params,res.callback)
+    //res.send(`Delete For Id ${req.params.id}`)
 })
+router.get("/count", (req, res) => {
+    CompanyModel.countData(req.body, res.callback)
+    //res.send(`Delete For Id ${req.params.id}`)
+})
+
 export default router
